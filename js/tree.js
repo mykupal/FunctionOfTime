@@ -11,7 +11,12 @@ var layoutInfo = {
 
 // A "ghost" layer which offsets other layers in the tree
 addNode("blank", {
-    layerShown: "ghost",
+    layerShown(){
+        if (hasUpgrade("u",15)) return "ghost"
+        else return false
+    },
+    position: 3,  
+    row: 0, 
 }, 
 )
 

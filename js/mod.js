@@ -1,25 +1,32 @@
 let modInfo = {
-	name: "The ??? Tree",
-	author: "nobody",
-	pointsName: "points",
-	modFiles: ["layers.js", "tree.js"],
+	name: "Function of Time",
+	author: "mikosss",
+	pointsName: "time",
+	modFiles: [
+		"layers/01_f.js",
+		"layers/02_u.js",
+		"layers/03_res.js",
+		"tree.js"
+	],
 
 	discordName: "",
 	discordLink: "",
-	initialStartPoints: new Decimal (10), // Used for hard resets and new players
+	initialStartPoints: new Decimal (0), // Used for hard resets and new players
 	offlineLimit: 1,  // In hours
 }
 
 // Set your version in num and name
 let VERSION = {
-	num: "0.0",
-	name: "Literally nothing",
+	num: "0.1",
+	name: "Knowledgable Update",
 }
 
-let changelog = `<h1>Changelog:</h1><br>
-	<h3>v0.0</h3><br>
-		- Added things.<br>
-		- Added stuff.`
+let changelog = `<h1>Changelog:</h1><br><br>
+	<h3 style="background-image: radial-gradient(#234F1E, #234F1E);-webkit-background-clip: text;color: transparent;">v0.1: Knowledgable Update</h3><br>
+		- Added Research.<br><br>
+	<h3 style="background-image: linear-gradient(#63C5DA, #FFE338);-webkit-background-clip: text;color: transparent;">v0.0: Origins</h3><br>
+		- Added f(t).<br>
+		- Added U.`
 
 let winText = `Congratulations! You have reached the end and beaten this game, but for now...`
 
@@ -41,7 +48,8 @@ function getPointGen() {
 	if(!canGenPoints())
 		return new Decimal(0)
 
-	let gain = new Decimal(1)
+	let gain = new Decimal(0)
+	if (getBuyableAmount("f", 11).gte(1)) gain = gain.add(1)
 	return gain
 }
 
@@ -55,7 +63,7 @@ var displayThings = [
 
 // Determines when the game "ends"
 function isEndgame() {
-	return player.points.gte(new Decimal("e280000000"))
+	return hasUpgrade("res",105)
 }
 
 
